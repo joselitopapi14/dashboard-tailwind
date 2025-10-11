@@ -6,6 +6,7 @@ import AvatarDemo from "@/components/ui/AvatarDemo.tsx";
 import CarouselDemo from "@/components/ui/CarouselDemo.tsx";
 import { ChartDefault } from "@/components/ChartDefault.tsx";
 import { ChartAreaInteractive } from "@/components/ui/chart-double";
+import { ComboboxDropdownMenu } from "@/components/ui/ComboBoxDropMenu.tsx";
 ---
 
 <html lang="en">
@@ -16,12 +17,10 @@ import { ChartAreaInteractive } from "@/components/ui/chart-double";
 		<title>Astro</title>
 	</head>
 	<body class="font-sans text-black">
-		<div class="grid grid-cols-5 min-h-[100vh]">
-			<div class="col-span-1 p-5 text-center">
+		<div class="grid grid-cols-7 min-h-[100vh]">
+			<div class="col-span-1 text-center">
 				<header>
-					<h2 class="font-extrabold text-3xl mb-12 mt-4">
-						Dashboard
-					</h2>
+					<h2 class="font-extrabold text-3xl mt-4">Dashboard</h2>
 				</header>
 
 				<main>
@@ -29,7 +28,7 @@ import { ChartAreaInteractive } from "@/components/ui/chart-double";
 						<ul class="cursor-pointer">
 							<li>Inicio</li>
 							<li>Clientes</li>
-							<li>Graficas</li>
+							<li>Metrics</li>
 							<li></li>
 							<li></li>
 						</ul>
@@ -38,33 +37,23 @@ import { ChartAreaInteractive } from "@/components/ui/chart-double";
 				<footer></footer>
 			</div>
 
-			<div class="col-span-4 rounded-lg bg-[#efefef] flex flex-col">
-				<header class="bg-[#fcfcfc] flex justify-end p-3 pr-10">
+			<div class="col-span-6 rounded-l-4xl bg-[#efefef] flex flex-col">
+				<header class="flex justify-end p-3 pr-10">
 					<div class="flex items-center">
-						<AvatarDemo client:load />
-						<svg class="w-6 h-6 pl-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
-                        </svg>
+						<ComboboxDropdownMenu client:load>
+							
+						</ComboboxDropdownMenu>
 					</div>
 				</header>
 
-				<div class="px-5 flex-1 flex flex-col justify-end pb-5">
-					<div>
-						<Button className="cursor-pointer" variant="destructive"
-							>Tailwind Button in Astro!</Button
-						>
-						<Button
-							className="mt-4 cursor-pointer px-6 py-6"
-							variant="outline"
-						/>
-					</div>
+				<div class="px-2 pb-2 flex-1 flex flex-col justify-end">
+					<div></div>
 
-					<div class="mt-auto">
+					<div class="mt-auto w-[60%]">
 						<ChartAreaInteractive client:load />
 					</div>
 				</div>
 			</div>
 		</div>
-		
 	</body>
 </html>

@@ -135,10 +135,6 @@ const chartConfig = {
   mobile: {
     label: "Mobile",
     color: "var(--chart-2)",
-  },
-  web: {
-    label: "Web",
-    color: "red"
   }
 } satisfies ChartConfig
 
@@ -273,13 +269,6 @@ export function ChartAreaInteractive() {
               type="natural"
               fill="url(#fillDesktop)"
               stroke="var(--color-desktop)"
-              stackId="a"
-            />
-            <Area
-              dataKey="web"
-              type="natural"
-              fill="url(#fillWeb)"
-              stroke="red"
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />

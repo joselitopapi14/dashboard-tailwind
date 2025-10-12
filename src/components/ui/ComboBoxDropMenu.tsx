@@ -45,7 +45,7 @@ export function ComboboxDropdownMenu() {
     <div className="flex w-full flex-col items-start justify-between rounded-md px-4 py-3 sm:flex-row sm:items-center">
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="focus:outline-none focus-visible:ring-0">
+          <Button variant="ghost" size="sm" className="focus:outline-none focus-visible:ring-0 py-6">
             <AvatarDemo />
             <MoreHorizontal />
           </Button>

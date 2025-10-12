@@ -7,6 +7,7 @@ import CarouselDemo from "@/components/ui/CarouselDemo.tsx";
 import { ChartDefault } from "@/components/ChartDefault.tsx";
 import { ChartAreaInteractive } from "@/components/ui/chart-double";
 import { ComboboxDropdownMenu } from "@/components/ui/ComboBoxDropMenu.tsx";
+import { NavigationMenuDemo } from "@/components/ui/NavigationMenuDemo.tsx";
 ---
 
 <html lang="en">
@@ -16,33 +17,25 @@ import { ComboboxDropdownMenu } from "@/components/ui/ComboBoxDropMenu.tsx";
 		<meta name="viewport" content="width=device-width" />
 		<title>Astro</title>
 	</head>
-	<body class="font-sans text-black">
+	<body class="font-sans text-black overflow-y-hidden overflow-x-hidden">
 		<div class="grid grid-cols-7 min-h-[100vh]">
-			<div class="col-span-1 text-center">
-				<header>
-					<h2 class="font-extrabold text-3xl mt-4">Dashboard</h2>
-				</header>
-
-				<main>
-					<nav>
-						<ul class="cursor-pointer">
-							<li>Inicio</li>
-							<li>Clientes</li>
-							<li>Metrics</li>
-							<li></li>
-							<li></li>
-						</ul>
-					</nav>
-				</main>
-				<footer></footer>
-			</div>
-
-			<div class="col-span-6 rounded-l-4xl bg-[#efefef] flex flex-col">
-				<header class="flex justify-end p-3 pr-10">
+			<div
+				class="col-span-7 bg-[#ffffff] flex flex-col shadow-lg shadow-black/30"
+			>
+				<header class="flex justify-end pr-2">
+					<div class="flex items-center mr-100">
+						<svg width="100" height="60">
+							<image
+								href="assets/opensearch-icon.svg"
+								width="60"
+								height="60"
+								
+							/>
+						</svg>
+						<NavigationMenuDemo client:load />
+					</div>
 					<div class="flex items-center">
-						<ComboboxDropdownMenu client:load>
-							
-						</ComboboxDropdownMenu>
+						<ComboboxDropdownMenu client:load />
 					</div>
 				</header>
 

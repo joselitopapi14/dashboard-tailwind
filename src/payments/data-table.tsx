@@ -12,6 +12,7 @@ import {
     useReactTable,
     getPaginationRowModel,
 } from "@tanstack/react-table"
+
 import type {
     SortingState,
     ColumnFiltersState,
@@ -70,49 +71,47 @@ export function DataTable<TData, TValue>({
     })
 
     return (
-        <div>
-            <div className="flex items-center py-4">
+        <div className="w-full flex flex-col h-full max-h-[500px]">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3">
                 <Input
                     placeholder="Filter emails..."
                     value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("email")?.setFilterValue(event.target.value)
                     }
-                    className="max-w-sm"
+                    className="max-w-sm h-9"
                 />
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="sm" className="ml-auto">
+                            Columns
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        {table
+                            .getAllColumns()
+                            .filter((column) => column.getCanHide())
+                            .map((column) => {
+                                return (
+                                    <DropdownMenuCheckboxItem
+                                        key={column.id}
+                                        className="capitalize"
+                                        checked={column.getIsVisible()}
+                                        onCheckedChange={(value) =>
+                                            column.toggleVisibility(!!value)
+                                        }
+                                    >
+                                        {column.id}
+                                    </DropdownMenuCheckboxItem>
+                                )
+                            })}
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-auto">
-                        Columns
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    {table
-                        .getAllColumns()
-                        .filter(
-                            (column) => column.getCanHide()
-                        )
-                        .map((column) => {
-                            return (
-                                <DropdownMenuCheckboxItem
-                                    key={column.id}
-                                    className="capitalize"
-                                    checked={column.getIsVisible()}
-                                    onCheckedChange={(value) =>
-                                        column.toggleVisibility(!!value)
-                                    }
-                                >
-                                    {column.id}
-                                </DropdownMenuCheckboxItem>
-                            )
-                        })}
-                </DropdownMenuContent>
-            </DropdownMenu>
 
-            <div className="overflow-hidden rounded-md border">
+            <div className="rounded-md border overflow-auto flex-1 min-h-0">
                 <Table>
-                    <TableHeader>
+                    <TableHeader className="sticky top-0 bg-background z-10">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
@@ -154,23 +153,34 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    Previous
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    Next
-                </Button>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-3">
+                <div className="text-xs text-muted-foreground">
+                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                </div>
+                <div className="flex items-center space-x-2">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        Previous
+                    </Button>
+                    <div className="text-xs text-muted-foreground whitespace-nowrap">
+                        Page {table.getState().pagination.pageIndex + 1} of{" "}
+                        {table.getPageCount()}
+                    </div>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        Next
+                    </Button>
+                </div>
             </div>
         </div>
     )

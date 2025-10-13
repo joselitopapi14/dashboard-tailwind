@@ -1,8 +1,8 @@
 "use client"
 
-import { columns } from "./columns"
-import { DataTable } from "./data-table"
-import { payments } from "./payments"
+import { columns } from "@/payments/columns"
+import { DataTable } from "@/payments/data-table"
+import { payments } from "@/payments/payments"
 
 export function PaymentsTableWrapper() {
   return (

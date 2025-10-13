@@ -1,14 +1,6 @@
 ---
 import "../styles/global.css";
-// Component Imports
-import { Button } from "@/components/ui/button";
-import AvatarDemo from "@/components/ui/AvatarDemo.tsx";
-import CarouselDemo from "@/components/ui/CarouselDemo.tsx";
-import { ChartDefault } from "@/components/ChartDefault.tsx";
-import { ChartAreaInteractive } from "@/components/ui/chart-double";
-import { ComboboxDropdownMenu } from "@/components/ui/ComboBoxDropMenu.tsx";
-import { NavigationMenuDemo } from "@/components/ui/NavigationMenuDemo.tsx";
-import { PaymentsTableWrapper } from "@/payments/PaymentsTableWrapper.tsx";
+import Dashboard from "@/components/Dashboard.tsx";
 ---
 
 <html lang="en">
@@ -16,43 +8,9 @@ import { PaymentsTableWrapper } from "@/payments/PaymentsTableWrapper.tsx";
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
-		<title>Astro</title>
+		<title>Dashboard - Astro</title>
 	</head>
-	<body class="font-sans bg-[#89c28c] text-black overflow-y-hidden overflow-x-hidden">
-		<div class="grid grid-cols-7 min-h-[100vh]">
-			<div class="col-span-1 bg-[#89c28c] flex justify-center">
-				<div class="pt-8">
-					<svg width="120" height="120">
-						<image href="assets/pinia.svg" width="120" height="120" />
-					</svg>
-				</div>
-			</div>
-
-			<div
-				class="col-span-6 rounded-t-4xl mt-2 mr-2 bg-[#ffffff] flex flex-col shadow-lg shadow-black/30"
-			>
-				<header class="flex justify-end">
-					<div class="w-[100%] flex items-center justify-center">
-						<div>
-							<NavigationMenuDemo client:load />
-						</div>
-					</div>
-
-					<div class="flex items-center">
-						<ComboboxDropdownMenu client:load />
-					</div>
-				</header>
-
-				<div class="px-2 pb-2 flex-1 flex flex-col justify-end">
-					<div class="w-full px-4">
-						<PaymentsTableWrapper client:load />
-					</div>
-					
-					<div class="mt-auto w-[60%]">
-						<ChartAreaInteractive client:load />
-					</div>
-				</div>
-			</div>
-		</div>
+	<body class="font-sans bg-[#89c28c] text-black overflow-hidden">
+		<Dashboard client:load />
 	</body>
 </html>

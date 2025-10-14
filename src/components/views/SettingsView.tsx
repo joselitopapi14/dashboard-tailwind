@@ -1,6 +1,6 @@
 export default function SettingsView() {
   return (
-    <div className="p-6 overflow-y-auto h-full">
+    <div className="pb-6 pl-6 overflow-y-auto h-full">
       <div className="max-w-3xl">
         <h2 className="text-2xl font-bold mb-6">Configuración</h2>
         

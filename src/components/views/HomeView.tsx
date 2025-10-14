@@ -1,13 +1,12 @@
-"use client"
+import { FieldDemo } from "../ui/FieldDemo"; 
 
-import { columns } from "@/payments/columns"
-import { DataTable } from "@/payments/data-table"
-import { payments } from "@/payments/payments"
-
-export function PaymentsTableWrapper() {
+export default function HomeView() {
   return (
-    <div className="w-full py-4">
-      <DataTable columns={columns} data={payments} />
+    <div className="pb-6 pl-6 overflow-y-auto h-full">
+      <div className="max-w-3xl">
+        <h2 className="text-2xl font-bold mb-6">Home</h2>
+        <FieldDemo />
+      </div>
     </div>
-  )
+  );
 }

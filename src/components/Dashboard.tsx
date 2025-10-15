@@ -107,7 +107,7 @@ export default function Dashboard() {
 
       {/* Contenido Principal */}
       <div className="flex-1 md:col-span-6 rounded-t-4xl mt-2 md:mr-2 bg-[#ffffff] flex flex-col shadow-lg shadow-black/30 overflow-hidden">
-        <header className="flex justify-between md:justify-end items-center px-4 pt-3 flex-shrink-0">
+        <header className="flex justify-end md:justify-end items-center px-4 pt-3 flex-shrink-0">
           {/* Espaciador para el botón hamburguesa en móvil */}
           <div className="md:hidden w-10"></div>
           

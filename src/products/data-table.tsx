@@ -38,11 +38,15 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    filterColumn?: string
+    filterPlaceholder?: string
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    filterColumn = "email",
+    filterPlaceholder = "Filtrar...",
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -71,20 +75,20 @@ export function DataTable<TData, TValue>({
     })
 
     return (
-        <div className="w-full flex flex-col h-[500px] max-h-[500px]">
+        <div className="w-full flex flex-col max-h-[500px]">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3">
                 <Input
-                    placeholder="Filter emails..."
-                    value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+                    placeholder={filterPlaceholder}
+                    value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("email")?.setFilterValue(event.target.value)
+                        table.getColumn(filterColumn)?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm h-9"
                 />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" size="sm" className="ml-auto">
-                            Columns
+                            Columnas
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -109,9 +113,9 @@ export function DataTable<TData, TValue>({
                 </DropdownMenu>
             </div>
 
-            <div className="rounded-md border flex-1 min-h-0 overflow-y-hidden">
+            <div className="rounded-md border overflow-auto flex-1 min-h-0">
                 <Table>
-                    <TableHeader className="sticky top-0 bg-background z-10 overflow-y-hidden">
+                    <TableHeader className="sticky top-0 bg-background z-10">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
@@ -146,7 +150,7 @@ export function DataTable<TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    No hay resultados.
                                 </TableCell>
                             </TableRow>
                         )}
@@ -156,8 +160,7 @@ export function DataTable<TData, TValue>({
             
             <div className="flex flex-col sm:flex-row items-center justify-between gap-2 pt-3">
                 <div className="text-xs text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                    Mostrando {table.getFilteredRowModel().rows.length} producto(s)
                 </div>
                 <div className="flex items-center space-x-2">
                     <Button
@@ -166,10 +169,10 @@ export function DataTable<TData, TValue>({
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
                     >
-                        Previous
+                        Anterior
                     </Button>
                     <div className="text-xs text-muted-foreground whitespace-nowrap">
-                        Page {table.getState().pagination.pageIndex + 1} of{" "}
+                        Página {table.getState().pagination.pageIndex + 1} de{" "}
                         {table.getPageCount()}
                     </div>
                     <Button
@@ -178,7 +181,7 @@ export function DataTable<TData, TValue>({
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                     >
-                        Next
+                        Siguiente
                     </Button>
                 </div>
             </div>

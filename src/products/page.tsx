@@ -1,15 +1,16 @@
-import { columns } from "./columns"
-import type { Payment } from "./columns"
+import { columns } from "./columnsProduct"
+import type { Product } from "./columnsProduct"
 import { DataTable } from "./data-table"
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<Product[]> {
   // Fetch data from your API here.
   return [
     {
       id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
+      nombre: "Leche Entera",
+      categoria: "Lácteos",
+      cantidad: 50,
+      precio: 3500,
     },
     // ...
   ]

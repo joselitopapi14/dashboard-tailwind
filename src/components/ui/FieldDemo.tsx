@@ -47,7 +47,7 @@ export function FieldDemo() {
                       <SelectValue placeholder="MM" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="01">Lácteos</SelectItem>
+                      <SelectItem value="01">Lacteos</SelectItem>
                       <SelectItem value="02">Carnes</SelectItem>
                       <SelectItem value="03">Verduras</SelectItem>
                       <SelectItem value="04">Frutas</SelectItem>
@@ -65,6 +65,10 @@ export function FieldDemo() {
                 <Field>
                   <FieldLabel htmlFor="checkout-7j9-cvv">Cantidad</FieldLabel>
                   <Input id="checkout-7j9-cvv" placeholder="123" required />
+                </Field>
+                <Field>
+                  <FieldLabel htmlFor="checkout-7j9-cvv">Precio</FieldLabel>
+                  <Input id="checkout-7j9-cvv" placeholder="$COP" required />
                 </Field>
               </div>
             </FieldGroup>

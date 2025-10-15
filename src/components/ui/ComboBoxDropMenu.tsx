@@ -38,6 +38,9 @@ const labels = [
 ]
 
 export function ComboboxDropdownMenu() {
+
+
+  
   const [label, setLabel] = React.useState("bug")
   const [open, setOpen] = React.useState(false)
 
@@ -51,40 +54,9 @@ export function ComboboxDropdownMenu() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel>Opciones</DropdownMenuLabel>
           <DropdownMenuGroup>
-            <DropdownMenuItem>Assign to...</DropdownMenuItem>
-            <DropdownMenuItem>Set due date...</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>Settings</DropdownMenuSubTrigger>
-              <DropdownMenuSubContent className="p-0">
-                <Command>
-                  <CommandInput
-                    placeholder="Filter label..."
-                    autoFocus={true}
-                    className="h-9"
-                  />
-                  <CommandList>
-                    <CommandEmpty>No label found.</CommandEmpty>
-                    <CommandGroup>
-                      {labels.map((label) => (
-                        <CommandItem
-                          key={label}
-                          value={label}
-                          onSelect={(value) => {
-                            setLabel(value)
-                            setOpen(false)
-                          }}
-                        >
-                          {label}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </DropdownMenuSubContent>
-            </DropdownMenuSub>
+            <DropdownMenuItem>Ajustes</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="text-red-600">
               Cerrar sesion

@@ -9,10 +9,12 @@ import {
 
 
 export function ItemLink({ 
-  title, 
+  title,
+  icon,
   active = false 
 }: { 
   title: string; 
+  icon?: React.ReactNode;
   active?: boolean 
 }) {
   return (
@@ -23,6 +25,7 @@ export function ItemLink({
             active ? 'bg-white/20' : 'hover:bg-white/10'
           }`}
         >
+          {icon}
           <ItemContent>
             <ItemTitle>{title}</ItemTitle>
           </ItemContent>

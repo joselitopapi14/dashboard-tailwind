@@ -4,16 +4,15 @@ import { ItemLink } from "@/components/ui/itemLink.tsx";
 import { ComboboxDropdownMenu } from "@/components/ui/ComboBoxDropMenu.tsx";
 
 // Páginas/Vistas
-import MetricsView from '@/components/views/MetricsSalesView';
-import SettingsView from '@/components/views/SettingsView';
-import HelpView from '@/components/views/HelpView';
-import VentasView from '@/components/views/InventoryView';
-import HomeView from '@/components/views/HomeView';
+import CrearUsuariosView from '@/components/views/CrearUsuariosView';
+import ListadoUsuariosView from '@/components/views/ListadoUsuariosView';
+import BuscarUsuariosView from '@/components/views/BuscarUsuariosView';
+import GestionarProyectosView from '@/components/views/GestionarProyectosView';
 
-type ViewType = 'home' | 'inventario' | 'metrics' | 'settings' | 'help';
+type ViewType = 'crear-usuarios' | 'listado-usuarios' | 'buscar-usuarios' | 'gestionar-proyectos';
 
 export default function Dashboard() {
-  const [currentView, setCurrentView] = useState<ViewType>('home');
+  const [currentView, setCurrentView] = useState<ViewType>('crear-usuarios');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleViewChange = (view: ViewType) => {
@@ -23,16 +22,14 @@ export default function Dashboard() {
 
   const renderView = () => {
     switch (currentView) {
-      case 'home':
-        return <HomeView />;
-      case 'inventario':
-        return <VentasView />;
-      case 'metrics':
-        return <MetricsView />;
-      case 'settings':
-        return <SettingsView />;
-      case 'help':
-        return <HelpView />;
+      case 'crear-usuarios':
+        return <CrearUsuariosView />;
+      case 'listado-usuarios':
+        return <ListadoUsuariosView />;
+      case 'buscar-usuarios':
+        return <BuscarUsuariosView />;
+      case 'gestionar-proyectos':
+        return <GestionarProyectosView />;
     }
   };
 
@@ -53,54 +50,38 @@ export default function Dashboard() {
       </div>
       <div className="flex justify-center px-2">
         <h2 className="font-sans font-bold text-[#ffe676] text-2xl text-center">
-          AstroBoard
+          Sistema de Usuarios
         </h2>
       </div>
       <div className="w-full px-2">
         <ul className="w-full space-y-1">
-          <li onClick={() => handleViewChange('home')} className="w-full flex"
-          >
-            <ItemLink title="Inicio"
+          <li onClick={() => handleViewChange('crear-usuarios')} className="w-full flex">
+            <ItemLink title="Crear Usuarios"
               icon={<svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd" />
-              </svg>
-              }
-              active={currentView === 'home'} />
+                <path fillRule="evenodd" d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z" clipRule="evenodd"/>
+              </svg>}
+              active={currentView === 'crear-usuarios'} />
           </li>
-          <li onClick={() => handleViewChange('metrics')} className="w-full">
-
-            <ItemLink title="Ventas"
-              icon={<svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
-              </svg>
-              }
-              active={currentView === 'metrics'} />
-          </li>
-          <li onClick={() => handleViewChange('inventario')} className="w-full">
-            <ItemLink title="Inventario"
+          <li onClick={() => handleViewChange('listado-usuarios')} className="w-full">
+            <ItemLink title="Listado de Usuarios"
               icon={<svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                <path fill-rule="evenodd" d="M5.617 2.076a1 1 0 0 1 1.09.217L8 3.586l1.293-1.293a1 1 0 0 1 1.414 0L12 3.586l1.293-1.293a1 1 0 0 1 1.414 0L16 3.586l1.293-1.293A1 1 0 0 1 19 3v18a1 1 0 0 1-1.707.707L16 20.414l-1.293 1.293a1 1 0 0 1-1.414 0L12 20.414l-1.293 1.293a1 1 0 0 1-1.414 0L8 20.414l-1.293 1.293A1 1 0 0 1 5 21V3a1 1 0 0 1 .617-.924ZM9 7a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H9Zm0 4a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Zm0 4a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd" />
-              </svg>
-              }
-              active={currentView === 'inventario'} />
+                <path fillRule="evenodd" d="M12 6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm-1.5 8a4 4 0 0 0-4 4 2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-3Zm6.82-3.096a5.51 5.51 0 0 0-2.797-6.293 3.5 3.5 0 1 1 2.796 6.292ZM19.5 18h.5a2 2 0 0 0 2-2 4 4 0 0 0-4-4h-1.1a5.503 5.503 0 0 1-.471.762A5.998 5.998 0 0 1 19.5 18ZM4 7.5a3.5 3.5 0 0 1 5.477-2.889 5.5 5.5 0 0 0-2.796 6.293A3.501 3.501 0 0 1 4 7.5ZM7.1 12H6a4 4 0 0 0-4 4 2 2 0 0 0 2 2h.5a5.998 5.998 0 0 1 3.071-5.238A5.505 5.505 0 0 1 7.1 12Z" clipRule="evenodd"/>
+              </svg>}
+              active={currentView === 'listado-usuarios'} />
           </li>
-          <li onClick={() => handleViewChange('settings')} className="w-full">
-            <ItemLink title="Configuración"
-              icon={
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" strokeLinecap="square" strokeLinejoin="round" strokeWidth="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
-
-              }
-              active={currentView === 'settings'} />
-          </li>
-          <li onClick={() => handleViewChange('help')} className="w-full">
-            <ItemLink title="Ayuda"
+          <li onClick={() => handleViewChange('buscar-usuarios')} className="w-full">
+            <ItemLink title="Buscar Usuarios"
               icon={<svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              }
-              active={currentView === 'help'} />
+                <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+              </svg>}
+              active={currentView === 'buscar-usuarios'} />
+          </li>
+          <li onClick={() => handleViewChange('gestionar-proyectos')} className="w-full">
+            <ItemLink title="Gestionar Proyectos"
+              icon={<svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <path fillRule="evenodd" d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Zm-3 8a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Zm2 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-2-1a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H9Z" clipRule="evenodd"/>
+              </svg>}
+              active={currentView === 'gestionar-proyectos'} />
           </li>
         </ul>
       </div>

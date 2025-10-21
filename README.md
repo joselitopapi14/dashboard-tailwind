@@ -78,57 +78,13 @@ Este proyecto es una aplicación web tipo dashboard que proporciona una interfaz
 
 ### 📌 Módulos Principales
 
-- **🏠 Home View**: Panel principal con vista general del sistema
 - **👥 Gestión de Usuarios**: Sistema completo de administración de usuarios
   - Crear nuevos usuarios
   - Listado completo de usuarios
   - Búsqueda y filtrado de usuarios
-- **�️ Ventas**: Módulo de gestión de ventas con:
-  - Registro de ventas diarias
-  - Tablas interactivas con filtros y paginación
-  - Visualización de datos de ventas
-- **📈 Métricas y Análisis**: Dashboard de métricas de ventas con gráficos y estadísticas
-- **📦 Inventario**: Gestión de productos e inventario
-  - Listado de productos con tabla interactiva
-  - Filtros y búsqueda avanzada
 - **� Gestión de Proyectos**: Administración de proyectos empresariales
-- **💳 Pagos**: Módulo de gestión de pagos y transacciones
-- **⚙️ Configuración**: Panel de configuración del sistema
-- **❓ Ayuda**: Sección de ayuda y soporte
 
-### 🎨 Componentes UI Implementados
 
-- **Avatar**: Componentes de avatar con demo
-- **Button**: Botones personalizables
-- **Card**: Tarjetas de contenido
-- **Carousel**: Carrusel de imágenes con demo
-- **Chart**: Gráficos simples y dobles para visualización de datos
-- **Checkbox**: Casillas de verificación
-- **Command**: Paleta de comandos (Command Palette)
-- **Dialog**: Diálogos y modales
-- **Dropdown Menu**: Menús desplegables (ComboBox)
-- **Field**: Campos de formulario con demo
-- **Input Group**: Grupos de entrada
-- **Label**: Etiquetas de formulario
-- **Navigation Menu**: Menú de navegación con demo
-- **Popover**: Popovers informativos
-- **Select**: Selectores personalizados
-- **Separator**: Separadores visuales
-- **Table**: Tablas de datos interactivas con ordenamiento y filtrado
-- **Textarea**: Áreas de texto
-- **Toast Notifications**: Notificaciones con Sonner
-
-### 🎯 Características Técnicas
-
-- ⚡ **Renderizado híbrido** con Astro (SSR + SSG)
-- ⚛️ **Componentes React 19** para interactividad
-- 🎨 **Tailwind CSS 4** para estilos modernos
-- 📊 **Recharts** para visualización de datos
-- 🗃️ **TanStack Table** para tablas avanzadas
-- 🎭 **Radix UI** para componentes accesibles
-- 🌙 **Modo oscuro** con next-themes
-- 📱 **Diseño responsive** móvil y escritorio
-- 🎉 **Animaciones** con canvas-confetti y tw-animate-css
 
 ## 🚀 Estructura del Proyecto
 
@@ -236,17 +192,6 @@ src/
 ├── types/               # Tipos TypeScript compartidos
 └── styles/              # Estilos globales
 ```
-
-### 🔑 Componentes Clave
-
-#### 1. **Dashboard.tsx** - El Corazón del Sistema
-
-Este componente es el núcleo de la aplicación. Gestiona:
-
-- **Estado de navegación**: Controla qué vista se muestra actualmente
-- **Menú lateral (Sidebar)**: Navegación principal del sistema
-- **Menú móvil responsive**: Se adapta a dispositivos móviles
-- **Renderizado condicional**: Muestra la vista correspondiente según la selección
 
 
 ## 📄 Licencia

@@ -6,7 +6,6 @@ Un dashboard moderno y completo desarrollado con Astro, React y Tailwind CSS, di
 
 ### Prerrequisitos
 - **Bun** instalado en tu sistema ([Instalar Bun](https://bun.sh))
-- Node.js 18+ (alternativa si no usas Bun)
 - Git
 
 ### Pasos para ejecutar el proyecto

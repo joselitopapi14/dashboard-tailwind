@@ -21,24 +21,12 @@ Un dashboard moderno y completo desarrollado con Astro, React y Tailwind CSS, di
    bun install
    ```
    
-   *Si usas npm o yarn:*
-   ```sh
-   npm install
-   # o
-   yarn install
-   ```
 
 3. **Iniciar el servidor de desarrollo**
    ```sh
    bun dev
    ```
    
-   *Si usas npm o yarn:*
-   ```sh
-   npm run dev
-   # o
-   yarn dev
-   ```
 
 4. **Abrir en el navegador**
    

@@ -3,7 +3,8 @@ export type Usuario = {
   identificacion: string
   nombres: string
   apellidos: string
-  fechaNacimiento: string
+  fecha_nacimiento: number  // Unix timestamp
   genero: string
   email: string
 }
+

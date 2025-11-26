@@ -49,7 +49,7 @@ export const columns: ColumnDef<Usuario>[] = [
     },
   },
   {
-    accessorKey: "fechaNacimiento",
+    accessorKey: "fecha_nacimiento",
     header: ({ column }) => {
       return (
         <Button
@@ -62,7 +62,21 @@ export const columns: ColumnDef<Usuario>[] = [
       )
     },
     cell: ({ row }) => {
-      const fecha = new Date(row.getValue("fechaNacimiento") + 'T00:00:00')
+      const fechaValue = row.getValue("fecha_nacimiento")
+
+      // Si no hay valor, mostrar un mensaje
+      if (!fechaValue) {
+        return <span className="text-gray-400">Sin fecha</span>
+      }
+
+      // Convertir Unix timestamp a Date (multiplicar por 1000 porque JS usa milisegundos)
+      const fecha = new Date((fechaValue as number) * 1000)
+
+      // Validar que la fecha sea válida
+      if (isNaN(fecha.getTime())) {
+        return <span className="text-gray-400">Fecha inválida</span>
+      }
+
       return fecha.toLocaleDateString("es-CO", {
         year: "numeric",
         month: "long",

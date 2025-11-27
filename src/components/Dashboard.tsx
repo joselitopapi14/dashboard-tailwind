@@ -12,7 +12,7 @@ import GestionarProyectosView from '@/components/views/GestionarProyectosView';
 type ViewType = 'crear-usuarios' | 'listado-usuarios' | 'buscar-usuarios' | 'gestionar-proyectos';
 
 export default function Dashboard() {
-  const [currentView, setCurrentView] = useState<ViewType>('crear-usuarios');
+  const [currentView, setCurrentView] = useState<ViewType>('listado-usuarios');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleViewChange = (view: ViewType) => {
@@ -99,7 +99,7 @@ export default function Dashboard() {
       </button>
 
       {/* Sidebar Desktop - Oculto en tablet/móvil, ancho fijo 240px */}
-      <div className="hidden lg:flex w-60 gap-6 bg-[#60bf5a]/90 flex-col flex-shrink-0">
+      <div className="hidden lg:flex w-60 gap-6 bg-[#60bf5a]/90 flex-col shrink-0">
         <SidebarContent isMobile={false} />
       </div>
 
@@ -120,8 +120,8 @@ export default function Dashboard() {
       )}
 
       {/* Contenido Principal */}
-      <div className="flex-1 rounded-t-4xl mt-2 lg:mr-2 bg-[#ffffff] flex flex-col shadow-lg shadow-black/30 overflow-hidden">
-        <header className="flex justify-end items-center px-4 pt-3 flex-shrink-0">
+      <div className="flex-1 rounded-t-4xl mt-2 lg:mr-2 bg-white flex flex-col shadow-lg shadow-black/30 overflow-hidden">
+        <header className="flex justify-end items-center px-4 pt-3 shrink-0">
           {/* Espaciador para el botón hamburguesa en móvil/tablet */}
           <div className="lg:hidden w-10"></div>
 

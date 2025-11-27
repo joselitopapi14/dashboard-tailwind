@@ -1,37 +1,140 @@
 "use client"
 import { useState, useEffect } from "react"
-import { columns } from "@/usuarios/columnsUsuarios"
+import { createColumns } from "@/usuarios/columnsUsuarios"
 import { DataTable } from "@/products/data-table"
+import { UsuarioForm } from "@/usuarios/UsuarioForm"
+import { DeleteDialog } from "@/usuarios/DeleteDialog"
 import type { Usuario } from "@/types/usuario"
+import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
+
+const API_URL = 'https://6927125626e7e41498fcd7b0.mockapi.io/api/v1/usuarios'
 
 export default function ListadoUsuariosView() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showForm, setShowForm] = useState(false)
+  const [editingUsuario, setEditingUsuario] = useState<Usuario | null>(null)
+  const [deletingUsuario, setDeletingUsuario] = useState<Usuario | null>(null)
+
+  // Fetch usuarios
+  const fetchUsuarios = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch(API_URL)
+
+      if (!response.ok) {
+        throw new Error('Error al cargar los usuarios')
+      }
+
+      const data = await response.json()
+      setUsuarios(data)
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error desconocido')
+      console.error('Error fetching usuarios:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchUsuarios = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch('https://6927125626e7e41498fcd7b0.mockapi.io/api/v1/usuarios')
-
-        if (!response.ok) {
-          throw new Error('Error al cargar los usuarios')
-        }
-
-        const data = await response.json()
-        setUsuarios(data)
-        setError(null)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Error desconocido')
-        console.error('Error fetching usuarios:', err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchUsuarios()
   }, [])
+
+  // Crear usuario
+  const handleCreate = async (usuarioData: Omit<Usuario, "id">) => {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuarioData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Error al crear usuario')
+      }
+
+      await fetchUsuarios()
+      setShowForm(false)
+    } catch (err) {
+      console.error('Error creating usuario:', err)
+      throw err
+    }
+  }
+
+  // Actualizar usuario
+  const handleUpdate = async (usuarioData: Usuario) => {
+    try {
+      const response = await fetch(`${API_URL}/${usuarioData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuarioData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Error al actualizar usuario')
+      }
+
+      await fetchUsuarios()
+      setEditingUsuario(null)
+    } catch (err) {
+      console.error('Error updating usuario:', err)
+      throw err
+    }
+  }
+
+  // Eliminar usuario
+  const handleDelete = async () => {
+    if (!deletingUsuario) return
+
+    try {
+      const response = await fetch(`${API_URL}/${deletingUsuario.id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error('Error al eliminar usuario')
+      }
+
+      await fetchUsuarios()
+      setDeletingUsuario(null)
+    } catch (err) {
+      console.error('Error deleting usuario:', err)
+      setError(err instanceof Error ? err.message : 'Error al eliminar')
+    }
+  }
+
+  // Handlers para las acciones
+  const handleEdit = (usuario: Usuario) => {
+    setEditingUsuario(usuario)
+    setShowForm(true)
+  }
+
+  const handleDeleteClick = (usuario: Usuario) => {
+    setDeletingUsuario(usuario)
+  }
+
+  const handleCancelForm = () => {
+    setShowForm(false)
+    setEditingUsuario(null)
+  }
+
+  const handleSubmitForm = async (usuarioData: Omit<Usuario, "id"> | Usuario) => {
+    if (editingUsuario) {
+      await handleUpdate(usuarioData as Usuario)
+    } else {
+      await handleCreate(usuarioData as Omit<Usuario, "id">)
+    }
+  }
+
+  // Crear columnas con callbacks
+  const columns = createColumns(handleEdit, handleDeleteClick)
 
   if (loading) {
     return (
@@ -57,12 +160,37 @@ export default function ListadoUsuariosView() {
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-bold mb-6">Listado de Usuarios</h2>
-      <DataTable
-        columns={columns}
-        data={usuarios}
-        filterColumn="nombres"
-        filterPlaceholder="Filtrar por nombres..."
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Listado de Usuarios</h2>
+        {!showForm && (
+          <Button onClick={() => setShowForm(true)}>
+            <Plus className="mr-2 h-4 w-4" />
+            Nuevo Usuario
+          </Button>
+        )}
+      </div>
+
+      {showForm ? (
+        <UsuarioForm
+          usuario={editingUsuario || undefined}
+          onSubmit={handleSubmitForm}
+          onCancel={handleCancelForm}
+          isEditing={!!editingUsuario}
+        />
+      ) : (
+        <DataTable
+          columns={columns}
+          data={usuarios}
+          filterColumn="nombres"
+          filterPlaceholder="Filtrar por nombres..."
+        />
+      )}
+
+      <DeleteDialog
+        open={!!deletingUsuario}
+        usuario={deletingUsuario}
+        onConfirm={handleDelete}
+        onCancel={() => setDeletingUsuario(null)}
       />
     </div>
   )
